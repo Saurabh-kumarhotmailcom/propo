@@ -14,14 +14,28 @@
     <script>
         var app = angular.module('myApp', ['ngCookies']);
         app.controller('myCtrl', function ($scope, $http, $cookies) {
-            $scope.welcome= localStorage.getItem("user_token");
+            $scope.token= localStorage.getItem("user_token");
+
+
+             var req = {
+                    method: 'GET',
+                    url: 'https://beyondbanking.openbankproject.com/obp/v2.1.0/my/accounts',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'DirectLogin token='+$scope.token
+                    }
+                }
+
+                $http(req).then(function (response) {
+                    $scope.myWelcome = response.data[0]._links.detail.href;
+                });
         });
     </script>
 </head>
 
 <body ng-app="myApp" ng-controller="myCtrl">
 hello
-    {{welcome}}
+    {{myWelcome}}
 </body>
 
 </html>
