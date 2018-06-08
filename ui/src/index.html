@@ -5,39 +5,30 @@
     <meta charset="utf-8">
     <title>Propo</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-
-
     <link rel="stylesheet" type="text/css" href="mystyle.css">
-
-
-
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-cookies.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
     <script>
-        var app = angular.module('myApp', []);
-        app.controller('myCtrl', function ($scope, $http,$location) {
-            // $http.get("welcome.json")
-            //  .then(function(response) {
-            //$scope.myWelcome = 'hi';
-            // });
+        var app = angular.module('myApp', ['ngCookies']);
+        app.controller('myCtrl', function ($scope, $http, $cookies) {
+
             $scope.login = function () {
                 var req = {
                     method: 'POST',
                     url: 'https://beyondbanking.openbankproject.com/my/logins/direct',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': 'DirectLogin username="Anil.Nl.03",password="X!26c96541", consumer_key="q3eodavv15klbdhhcoxrbmb5kpwlmxxq01rg4kwi"'
+                        'Authorization': 'DirectLogin username=' + $scope.username + ',password=' + $scope.password + ', consumer_key="q3eodavv15klbdhhcoxrbmb5kpwlmxxq01rg4kwi"'
                     }
                 }
 
-                $http(req).then(function(response){
+                $http(req).then(function (response) {
                     $scope.myWelcome = response.data;
-                //    // window.location.assign = '/landingpage.html';
-                //    $location.path('/landingpage.html').replace();
-                //   // $location.url('landingpage.html');
-
+                    localStorage.setItem("user_token", response.data.token);
+                    window.location.href = 'landingpage.html';
                 });
             };
         });
@@ -48,7 +39,6 @@
 </head>
 
 <body ng-app="myApp" ng-controller="myCtrl">
-    {{myWelcome}}
     <section class="login-block">
         <div class="container">
             <div class="row">
@@ -57,12 +47,12 @@
                     <form class="login-form">
                         <div class="form-group">
                             <label for="exampleInputEmail1" class="text-uppercase">Username</label>
-                            <input type="text" class="form-control" placeholder="">
+                            <input type="text" class="form-control" placeholder="" ng-model="username">
 
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1" class="text-uppercase">Password</label>
-                            <input type="password" class="form-control" placeholder="">
+                            <input type="password" class="form-control" placeholder="" ng-model="password">
                         </div>
 
 

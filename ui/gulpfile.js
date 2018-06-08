@@ -18,7 +18,7 @@ gulp.task('publish', function () {
     var publisher = awspublish.create({
         region: 'us-west-2',
         params: {
-            Bucket: 'scrum-metrics-cal'
+            Bucket: 'propo-bucket'
         }
     });
     var headers = {
