@@ -1,0 +1,80 @@
+[
+    {
+        "Food": [
+            {
+                "Category": "Groceries",
+                "BudgAmount": "20",
+                "SpentTillNOw": "50",
+                "Max_Limit": "50"
+            },
+            {
+                "Category": "Restaurant",
+                "BudgAmount": "25",
+                "SpentTillNOw": "10",
+                "Max_Limit": "50"
+            },
+            {
+                "Category": "Coffee and Lunch",
+                "BudgAmount": "25",
+                "SpentTillNOw": "10",
+                "Max_Limit": "50"
+            },
+            {
+                "Category": "Bars",
+                "BudgAmount": "25",
+                "SpentTillNOw": "10",
+                "Max_Limit": "50"
+            }
+        ]
+    },
+    {
+        "PersonalCare": [
+            {
+                "Category": "Health and care",
+                "BudgAmount": "25",
+                "SpentTillNOw": "10",
+                "Max_Limit": "50"
+            },
+            {
+                "Category": "Clothes",
+                "BudgAmount": "25",
+                "SpentTillNOw": "10",
+                "Max_Limit": "10"
+            },
+            {
+                "Category": "Clothtttes",
+                "BudgAmount": "25",
+                "SpentTillNOw": "10",
+                "Max_Limit": "50"
+            }
+        ]
+    },
+    {
+        "Hobbies": [
+            {
+                "Category": "Entertainment",
+                "BudgAmount": "25",
+                "SpentTillNOw": "10",
+                "Max_Limit": "50"
+            },
+            {
+                "Category": "Travel",
+                "BudgAmount": "25",
+                "SpentTillNOw": "10",
+                "Max_Limit": "50"
+            },
+            {
+                "Category": "Gifts",
+                "BudgAmount": "25",
+                "SpentTillNOw": "10",
+                "Max_Limit": "50"
+            },
+            {
+                "Category": "Sports",
+                "BudgAmount": "25",
+                "SpentTillNOw": "10",
+                "Max_Limit": "50"
+            }
+        ]
+    }
+]

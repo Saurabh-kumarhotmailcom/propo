@@ -1,215 +1,263 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<title>Dashboard</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript"
-	src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
-<script>
-	$(document).ready(function() {
-		/* Chart for income account */
-		var chartIncome = new CanvasJS.Chart("chartIncomeContainer", {
-			title : {
-				text : "Income distribution",
-				fontSize : 27
-			},
-			axisY : {
-				title : ""
-			},
-			legend : {
-				verticalAlign : "center",
-				horizontalAlign : "right"
-			},
-			data : [ {
-				type : "pie",
-				showInLegend : true,
-				toolTipContent : "{label} <br/> {y}",
-				indexLabel : "{label}{y}",
-				dataPoints : [ {
-					label : "Savings",
-					y : 500,
-					legendText : "Savings"
-				}, {
-					label : "Variables",
-					y : 1500,
-					legendText : "Variables"
-				}, {
-					label : "Fixed",
-					y : 1500,
-					legendText : "Fixed"
-				}, {
-					label : "Debt",
-					y : 500,
-					legendText : "Debt"
-				} ]
-			} ]
+	<title>Dashboard</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-cookies.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+
+
+
+
+
+	<script>
+		$(document).ready(function () {
+			/* Chart for income account */
+			var chartIncome = new CanvasJS.Chart("chartIncomeContainer", {
+				title: {
+					text: "Income distribution",
+					fontSize: 27
+				},
+				axisY: {
+					title: ""
+				},
+				legend: {
+					verticalAlign: "center",
+					horizontalAlign: "right"
+				},
+				data: [{
+					type: "pie",
+					showInLegend: true,
+					toolTipContent: "{label} <br/> {y}",
+					indexLabel: "{label}{y}",
+					dataPoints: [{
+						label: "Savings",
+						y: 500,
+						legendText: "Savings"
+					}, {
+						label: "Variables",
+						y: 1500,
+						legendText: "Variables"
+					}, {
+						label: "Fixed",
+						y: 1500,
+						legendText: "Fixed"
+					}, {
+						label: "Debt",
+						y: 500,
+						legendText: "Debt"
+					}]
+				}]
+			});
+			chartIncome.render();
+
+			/* Chart for fixed account */
+			var chartFixed = new CanvasJS.Chart("chartFixedContainer", {
+				title: {
+					text: "Fixed Payments",
+					fontSize: 27
+				},
+				axisY: {
+					title: ""
+				},
+				legend: {
+					verticalAlign: "center",
+					horizontalAlign: "right"
+				},
+				data: [{
+					type: "pie",
+					showInLegend: true,
+					toolTipContent: "{label} <br/> {y}",
+					indexLabel: "{label} - {y}",
+					dataPoints: [{
+						label: "Subscription",
+						y: 250,
+						legendText: "Subscription"
+					}, {
+						label: "Utility",
+						y: 200,
+						legendText: "Utility"
+					}, {
+						label: "Rent",
+						y: 700,
+						legendText: "Rent"
+					}, {
+						label: "Insurance",
+						y: 100,
+						legendText: "Insurance"
+					}, {
+						label: "Lease",
+						y: 250,
+						legendText: "Lease"
+					}]
+				}]
+			});
+			chartFixed.render();
+
+			/* Chart for savings account */
+			var chartSavings = new CanvasJS.Chart("chartSavingsContainer", {
+				title: {
+					text: "Savings Amount"
+				},
+				axisY: {
+					title: "",
+					includeZero: false
+				},
+				axisX: {
+					interval: 1
+				},
+				data: [{
+					type: "line", //try changing to column, area
+					toolTipContent: "{label}: {y}/-",
+					dataPoints: [{
+						label: "2018",
+						y: 20
+					}, {
+						label: "2019",
+						y: 25
+					}, {
+						label: "2020",
+						y: 30
+					}, {
+						label: "2021",
+						y: 35
+					}, {
+						label: "2022",
+						y: 40
+					}, {
+						label: "2023",
+						y: 45
+					}, {
+						label: "2024",
+						y: 50
+					}, {
+						label: "2025",
+						y: 55
+					}]
+				}]
+			});
+			chartSavings.render();
+
+			$(".canvasjs-chart-credit").css("display", "none");
 		});
-		chartIncome.render();
 
-		/* Chart for fixed account */
-		var chartFixed = new CanvasJS.Chart("chartFixedContainer", {
-			title : {
-				text : "Fixed Payments",
-				fontSize : 27
-			},
-			axisY : {
-				title : ""
-			},
-			legend : {
-				verticalAlign : "center",
-				horizontalAlign : "right"
-			},
-			data : [ {
-				type : "pie",
-				showInLegend : true,
-				toolTipContent : "{label} <br/> {y}",
-				indexLabel : "{label} - {y}",
-				dataPoints : [ {
-					label : "Subscription",
-					y : 250,
-					legendText : "Subscription"
-				}, {
-					label : "Utility",
-					y : 200,
-					legendText : "Utility"
-				}, {
-					label : "Rent",
-					y : 700,
-					legendText : "Rent"
-				}, {
-					label : "Insurance",
-					y : 100,
-					legendText : "Insurance"
-				}, {
-					label : "Lease",
-					y : 250,
-					legendText : "Lease"
-				} ]
-			} ]
+		function clickBudgetButton(button, text) {
+			$("#" + text).css("display", "");
+			$("#" + button).css("display", "none");
+			$("#" + text).focus();
+			$("#" + text).val($("#" + button).val())
+		}
+
+		function budgetTextBlur(button, text) {
+			$("#" + text).css("display", "none");
+			$("#" + button).val($("#" + text).val())
+			$("#" + button).css("display", "");
+		}
+
+
+		var app = angular.module('myApp', ['ngCookies']);
+		app.controller('myCtrl', function ($scope, $http, $cookies) {
+			$scope.myObj = {
+				'background-color': 'red'
+			}
+
+			var req = {
+				method: 'GET',
+				url: './json/variable.json',
+			}
+
+			$http(req).then(function (response) {
+				$scope.food = response.data[0].Food;
+				$scope.personalcare = response.data[1].PersonalCare;
+				$scope.hobbies = response.data[2].Hobbies;
+				//alert($scope.food[0]);
+			});
+
+			
+
 		});
-		chartFixed.render();
-
-		/* Chart for savings account */
-		var chartSavings = new CanvasJS.Chart("chartSavingsContainer", {
-			title : {
-				text : "Savings Amount"
-			},
-			axisY : {
-				title : "",
-				includeZero : false
-			},
-			axisX : {
-				interval : 1
-			},
-			data : [ {
-				type : "line", //try changing to column, area
-				toolTipContent : "{label}: {y}/-",
-				dataPoints : [ {
-					label : "2018",
-					y : 20
-				}, {
-					label : "2019",
-					y : 25
-				}, {
-					label : "2020",
-					y : 30
-				}, {
-					label : "2021",
-					y : 35
-				}, {
-					label : "2022",
-					y : 40
-				}, {
-					label : "2023",
-					y : 45
-				}, {
-					label : "2024",
-					y : 50
-				}, {
-					label : "2025",
-					y : 55
-				} ]
-			} ]
-		});
-		chartSavings.render();
-
-		$(".canvasjs-chart-credit").css("display", "none");
-	});
-
-	function clickBudgetButton(button, text) {
-		$("#" + text).css("display", "");
-		$("#" + button).css("display", "none");
-		$("#" + text).focus();
-		$("#" + text).val($("#" + button).val())
-	}
-
-	function budgetTextBlur(button, text) {
-		$("#" + text).css("display", "none");
-		$("#" + button).val($("#" + text).val())
-		$("#" + button).css("display", "");
-	}
-</script>
-<style>
-/* Remove the navbar's default margin-bottom and rounded borders */
-.navbar {
-	margin-bottom: 0;
-	border-radius: 0;
-}
-
-/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-.row.content {
-	height: 450px
-}
 
 
-.table-heading {
-	text-align: center;
-}
+	</script>
+	<style>
+		/* Remove the navbar's default margin-bottom and rounded borders */
 
-.form-control {
-	margin: 0px auto;
-	width: 25%;
-	background-color: green;
-	color: #fff;
-	text-align: right;
-}
+		.navbar {
+			margin-bottom: 0;
+			border-radius: 0;
+		}
 
-.tab-content {
-	text-align: center;
-}
+		/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
 
-.loginUser {
-	color: #fff !important;
-	line-height: 67px !important;
-	font-size: 100% !important;
-}
+		.row.content {
+			height: 450px
+		}
 
+		/* Set gray background color and 100% height */
 
-</style>
+		.sidenav {
+			padding-top: 20px;
+			background-color: #f1f1f1;
+			height: 100%;
+		}
+
+		.table-heading {
+			text-align: center;
+		}
+
+		.form-control {
+			margin: 0px auto;
+			width: 25%;
+			background-color: green;
+			color: #fff;
+			text-align: right;
+		}
+
+		.tab-content {
+			text-align: center;
+		}
+
+		.loginUser {
+			color: #fff !important;
+			line-height: 67px !important;
+			font-size: 100% !important;
+		}
+
+		/* On small screens, set height to 'auto' for sidenav and grid */
+
+		@media screen and (max-width: 767px) {
+			.sidenav {
+				height: auto;
+				padding: 15px;
+			}
+			.row.content {
+				height: auto;
+			}
+		}
+	</style>
 </head>
-<body>
-	<nav class="navbar navbar-inverse"
-		style="background-image: url(../header-banner.jpg);">
-  <div class="container-fluid">
-    <div class="navbar-header">
- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-			<img class="img-rounded" src="../propo logo small white.png">
+
+<body ng-app="myApp" ng-controller="myCtrl">
+	
+	<nav class="navbar navbar-inverse" style="background-image: url(../header-banner.jpg);">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<img class="img-rounded" src="../propo logo small white.png">
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#" class="loginUser"><span
-							class="glyphicon glyphicon-user"></span> User</a></li>
+					<li>
+						<a href="#" class="loginUser">
+							<span class="glyphicon glyphicon-user"></span> User</a>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -219,20 +267,28 @@
 		<div class="row content">
 			<div class="col-sm-12 text-left">
 				<h3>Dashboard</h3>
-
 				<ul class="nav nav-tabs">
-					<li class="active"><a data-toggle="tab" href="#income">Income</a></li>
-					<li><a data-toggle="tab" href="#variable">Variable</a></li>
-					<li><a data-toggle="tab" href="#fixed">Fixed</a></li>
-					<li><a data-toggle="tab" href="#savings">Savings</a></li>
-					<li><a data-toggle="tab" href="#debt">Debt</a></li>
+					<li class="active">
+						<a data-toggle="tab" href="#income">Income</a>
+					</li>
+					<li>
+						<a data-toggle="tab" href="#variable">Variable</a>
+					</li>
+					<li>
+						<a data-toggle="tab" href="#fixed">Fixed</a>
+					</li>
+					<li>
+						<a data-toggle="tab" href="#savings">Savings</a>
+					</li>
+					<li>
+						<a data-toggle="tab" href="#debt">Debt</a>
+					</li>
 				</ul>
 
 				<div class="tab-content">
 					<div id="income" class="tab-pane fade in active">
 						<h1>&euro;4000</h1>
-						<div id="chartIncomeContainer" class="chart"
-							style="width: 100%; height: 300px"></div>
+						<div id="chartIncomeContainer" class="chart" style="width: 100%; height: 300px"></div>
 
 					</div>
 					<div id="variable" class="tab-pane fade">
@@ -254,84 +310,40 @@
 									<td></td>
 									<td></td>
 								</tr>
-								<tr>
+								<tr ng-repeat="f in food">
 
-									<td>Groceries</td>
-									<td><input type="button" id="groceries_budget_btn"
-										onclick="clickBudgetButton('groceries_budget_btn','groceries_budget_txt')"
-										class="btn-primary" value="25"> <input type="text"
-										id="groceries_budget_txt" style="display: none;"
-										onblur="budgetTextBlur('groceries_budget_btn','groceries_budget_txt')"
-										class="form-control" value="0"></td>
-									<td>10</td>
-									<td><input type="text" id="groceries_budget"
-										class="form-control" value="50"></td>
+									<td>{{f.Category}}</td>
+									<td>
+										<input type="button" id="groceries_budget_btn" onclick="clickBudgetButton('groceries_budget_btn','groceries_budget_txt')"
+										 class="btn-primary" value="{{f.BudgAmount}}" ng-model="f.BudgAmount">
+										<input type="text" id="groceries_budget_txt" style="display: none;" onblur="budgetTextBlur('groceries_budget_btn','groceries_budget_txt')"
+										 class="form-control" value="0">
+									</td>
+									<td>{{f.SpentTillNOw}}</td>
+									<td>
+										<input type="text" id="groceries_budget" ng-style="({{f.SpentTillNOw}}>{{f.Max_Limit}}-5) && myObj" class="form-control" value="{{f.Max_Limit}}">
+									</td>
 								</tr>
-								<tr>
-									<td>Restaurants</td>
-									<td><input type="button" id="restaurants_budget_btn"
-										onclick="clickBudgetButton('restaurants_budget_btn','restaurants_budget_txt')"
-										class="btn-primary" value="25"> <input type="text"
-										id="restaurants_budget_txt" style="display: none;"
-										onblur="budgetTextBlur('restaurants_budget_btn','restaurants_budget_txt')"
-										class="form-control" value="0"></td>
-									<td>10</td>
-									<td><input type="text" id="restaurants_budget"
-										class="form-control" value="50"></td>
-								</tr>
-								<tr>
-									<td>Coffee and lunch</td>
-									<td><input type="button" id="coffeLunch_budget_btn"
-										onclick="clickBudgetButton('coffeLunch_budget_btn','coffeLunch_budget_txt')"
-										class="btn-primary" value="25"> <input type="text"
-										id="coffeLunch_budget_txt" style="display: none;"
-										onblur="budgetTextBlur('coffeLunch_budget_btn','coffeLunch_budget_txt')"
-										class="form-control" value="0"></td>
-									<td>10</td>
-									<td><input type="text" id="coffeLunch_budget"
-										class="form-control" value="50"></td>
-								</tr>
-								<tr>
-									<td>Bars</td>
-									<td><input type="button" id="bars_budget_btn"
-										onclick="clickBudgetButton('bars_budget_btn','bars_budget_txt')"
-										class="btn-primary" value="25"> <input type="text"
-										id="bars_budget_txt" style="display: none;"
-										onblur="budgetTextBlur('bars_budget_btn','bars_budget_txt')"
-										class="form-control" value="0"></td>
-									<td>10</td>
-									<td><input type="text" id="bars_budget"
-										class="form-control" value="50"></td>
-								</tr>
+
 								<tr class="success">
 									<td>Personal Care</td>
 									<td></td>
 									<td></td>
 									<td></td>
 								</tr>
-								<tr>
-									<td>Health & care</td>
-									<td><input type="button" id="healthcare_personal_btn"
-										onclick="clickBudgetButton('healthcare_personal_btn','healthcare_personal_btn')"
-										class="btn-primary" value="25"> <input type="text"
-										id="healthcare_personal_txt" style="display: none;"
-										onblur="budgetTextBlur('healthcare_personal_btn','healthcare_personal_btn')"
-										class="form-control" value="0"></td>
-									<td>10</td>
-									<td><input type="text" id="healthcare_personal"
-										class="form-control" value="50"></td>
-								</tr>
-								<tr>
-									<td>Clothes</td>
-									<td><input type="button" id="clothes_personal_btn"
-										onclick="clickBudgetButton('clothes_personal_btn','clothes_personal_txt')"
-										class="btn-primary" value="25"> <input type="text"
-										id="clothes_personal_txt" style="display: none;"
-										onblur="budgetTextBlur('clothes_personal_btn','clothes_personal_txt')"
-										class="form-control" value="0"></td>
-									<td>10</td>
-									<td><input type="text" id="clothes_personal"
-										class="form-control" value="50"></td>
+								<tr ng-repeat="f in personalcare">
+
+									<td>{{f.Category}}</td>
+									<td>
+										<input type="button" id="groceries_budget_btn" onclick="clickBudgetButton('groceries_budget_btn','groceries_budget_txt')"
+										 class="btn-primary" value="{{f.BudgAmount}}">
+										<input type="text" id="groceries_budget_txt" style="display: none;" onblur="budgetTextBlur('groceries_budget_btn','groceries_budget_txt')"
+										 class="form-control" value="0">
+									</td>
+									<td>{{f.SpentTillNOw}}</td>
+									<td>
+										<input type="text" id="groceries_budget" class="form-control" ng-style="({{f.BudgAmount}}>{{f.Max_Limit}}-5) && myObj" value="{{f.Max_Limit}}">
+									</td>
 								</tr>
 								<tr class="success">
 									<td>Hobbies</td>
@@ -339,53 +351,19 @@
 									<td></td>
 									<td></td>
 								</tr>
-								<tr>
-									<td>Travel</td>
-									<td><input type="button" id="travel_hobbies_btn"
-										onclick="clickBudgetButton('travel_hobbies_btn','travel_hobbies_txt')"
-										class="btn-primary" value="25"> <input type="text"
-										id="travel_hobbies_txt" style="display: none;"
-										onblur="budgetTextBlur('travel_hobbies_btn','travel_hobbies_txt')"
-										class="form-control" value="0"></td>
-									<td>10</td>
-									<td><input type="text" id="travel_hobbies"
-										class="form-control " value="50"></td>
-								</tr>
-								<tr>
-									<td>Gifts</td>
-									<td><input type="button" id="gifts_hobbies_btn"
-										onclick="clickBudgetButton('gifts_hobbies_btn','gifts_hobbies_txt')"
-										class="btn-primary" value="25"> <input type="text"
-										id="gifts_hobbies_txt" style="display: none;"
-										onblur="budgetTextBlur('gifts_hobbies_btn','gifts_hobbies_txt')"
-										class="form-control" value="0"></td>
-									<td>10</td>
-									<td><input type="text" id="gifts_hobbies"
-										class="form-control" value="50"></td>
-								</tr>
-								<tr>
-									<td>Sports</td>
-									<td><input type="button" id="sports_hobbies_btn"
-										onclick="clickBudgetButton('sports_hobbies_btn','sports_hobbies_txt')"
-										class="btn-primary" value="25"> <input type="text"
-										id="sports_hobbies_txt" style="display: none;"
-										onblur="budgetTextBlur('sports_hobbies_btn','sports_hobbies_txt')"
-										class="form-control" value="0"></td>
-									<td>10</td>
-									<td><input type="text" id="sports_hobbies"
-										class="form-control" value="50"></td>
-								</tr>
-								<tr>
-									<td>Entertainment</td>
-									<td><input type="button" id="entertain_hobbies_btn"
-										onclick="clickBudgetButton('entertain_hobbies_btn','entertain_hobbies_txt')"
-										class="btn-primary" value="25"> <input type="text"
-										id="entertain_hobbies_txt" style="display: none;"
-										onblur="budgetTextBlur('entertain_hobbies_btn','entertain_hobbies_txt')"
-										class="form-control" value="0"></td>
-									<td>10</td>
-									<td><input type="text" id="entertain_hobbies"
-										class="form-control" value="50"></td>
+								<tr ng-repeat="f in hobbies">
+
+									<td>{{f.Category}}</td>
+									<td>
+										<input type="button" id="groceries_budget_btn" onclick="clickBudgetButton('groceries_budget_btn','groceries_budget_txt')"
+										 class="btn-primary" value="{{f.BudgAmount}}">
+										<input type="text" id="groceries_budget_txt" style="display: none;" onblur="budgetTextBlur('groceries_budget_btn','groceries_budget_txt')"
+										 class="form-control" value="0">
+									</td>
+									<td>{{f.SpentTillNOw}}</td>
+									<td>
+										<input type="text" id="groceries_budget" class="form-control" value="{{f.Max_Limit}}">
+									</td>
 								</tr>
 							</tbody>
 						</table>
@@ -393,14 +371,12 @@
 					</div>
 					<div id="fixed" class="tab-pane fade">
 						<h1>&euro;1500</h1>
-						<div id="chartFixedContainer" class="chart"
-							style="height: 300px; width: 47%; margin: 0px auto;"></div>
+						<div id="chartFixedContainer" class="chart" style="height: 300px; width: 47%; margin: 0px auto;"></div>
 
 					</div>
 					<div id="savings" class="tab-pane fade">
 						<h1>&euro;500</h1>
-						<div id="chartSavingsContainer" class="chart"
-							style="height: 300px; width: 47%; margin: 0px auto;"></div>
+						<div id="chartSavingsContainer" class="chart" style="height: 300px; width: 47%; margin: 0px auto;"></div>
 
 					</div>
 					<div id="debt" class="tab-pane fade">
@@ -412,4 +388,5 @@
 		</div>
 	</div>
 </body>
+
 </html>
