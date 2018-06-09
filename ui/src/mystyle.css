@@ -22,3 +22,13 @@ padding : 50px 0;
 .banner-text h2{color:#fff; font-weight:600;}
 .banner-text h2:after{content:" "; width:100px; height:5px; background:#FFF; display:block; margin-top:20px; border-radius:3px;}
 .banner-text p{color:#fff;}
+
+.accordion.accordion-1 p {
+    font-size: 1rem; }
+  
+  .accordion.accordion-1 .card {
+    border: 0; }
+    .accordion.accordion-1 .card .card-header {
+      border: 0; }
+    .accordion.accordion-1 .card .card-body {
+      line-height: 1.4; }
