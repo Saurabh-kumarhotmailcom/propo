@@ -1,177 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Propo</title>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <link rel="stylesheet" type="text/css" href="mystyle.css">
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-cookies.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<title>Dashboard</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+<script>
+	$(document).ready(function() {
+		/* Chart for income account */
+		var chartIncome = new CanvasJS.Chart("chartIncomeContainer", {
+			title : {
+				text : "Income distribution",
+				fontSize : 27
+			},
+			axisY : {
+				title : ""
+			},
+			legend : {
+				verticalAlign : "center",
+				horizontalAlign : "right"
+			},
+			data : [ {
+				type : "pie",
+				showInLegend : true,
+				toolTipContent : "{label} <br/> {y}",
+				indexLabel : "{label}{y}",
+				dataPoints : [ {
+					label : "Savings",
+					y : 500,
+					legendText : "Savings"
+				}, {
+					label : "Variables",
+					y : 1500,
+					legendText : "Variables"
+				}, {
+					label : "Fixed",
+					y : 1500,
+					legendText : "Fixed"
+				}, {
+					label : "Debt",
+					y : 500,
+					legendText : "Debt"
+				} ]
+			} ]
+		});
+		chartIncome.render();
 
-    <script>
-        var app = angular.module('myApp', ['ngCookies']);
-        app.controller('myCtrl', function ($scope, $http, $cookies) {
-            $scope.token= localStorage.getItem("user_token");
+		/* Chart for fixed account */
+		var chartFixed = new CanvasJS.Chart("chartFixedContainer", {
+			title : {
+				text : "Fixed Payments",
+				fontSize : 27
+			},
+			axisY : {
+				title : ""
+			},
+			legend : {
+				verticalAlign : "center",
+				horizontalAlign : "right"
+			},
+			data : [ {
+				type : "pie",
+				showInLegend : true,
+				toolTipContent : "{label} <br/> {y}",
+				indexLabel : "{label} - {y}",
+				dataPoints : [ {
+					label : "Subscription",
+					y : 250,
+					legendText : "Subscription"
+				}, {
+					label : "Utility",
+					y : 200,
+					legendText : "Utility"
+				}, {
+					label : "Rent",
+					y : 700,
+					legendText : "Rent"
+				}, {
+					label : "Insurance",
+					y : 100,
+					legendText : "Insurance"
+				}, {
+					label : "Lease",
+					y : 250,
+					legendText : "Lease"
+				} ]
+			} ]
+		});
+		chartFixed.render();
 
+		/* Chart for savings account */
+		var chartSavings = new CanvasJS.Chart("chartSavingsContainer", {
+			title : {
+				text : "Savings Amount"
+			},
+			axisY : {
+				title : "",
+				includeZero : false
+			},
+			axisX : {
+				interval : 1
+			},
+			data : [ {
+				type : "line", //try changing to column, area
+				toolTipContent : "{label}: {y}/-",
+				dataPoints : [ {
+					label : "2018",
+					y : 20
+				}, {
+					label : "2019",
+					y : 25
+				}, {
+					label : "2020",
+					y : 30
+				}, {
+					label : "2021",
+					y : 35
+				}, {
+					label : "2022",
+					y : 40
+				}, {
+					label : "2023",
+					y : 45
+				}, {
+					label : "2024",
+					y : 50
+				}, {
+					label : "2025",
+					y : 55
+				} ]
+			} ]
+		});
+		chartSavings.render();
 
-             var req = {
-                    method: 'GET',
-                    url: 'https://beyondbanking.openbankproject.com/obp/v2.1.0/my/accounts',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'DirectLogin token='+$scope.token
-                    }
-                }
+		$(".canvasjs-chart-credit").css("display", "none");
+	});
 
-                $http(req).then(function (response) {
-                    $scope.myWelcome = response.data[0]._links.detail.href;
-                });
-        });
-        $(document).ready(function() {
-    		/* Chart for income account */
-    		var chartIncome = new CanvasJS.Chart("chartIncomeContainer", {
-    			title : {
-    				text : "Income distribution",
-    				fontSize : 27
-    			},
-    			axisY : {
-    				title : ""
-    			},
-    			legend : {
-    				verticalAlign : "center",
-    				horizontalAlign : "right"
-    			},
-    			data : [ {
-    				type : "pie",
-    				showInLegend : true,
-    				toolTipContent : "{label} <br/> {y}",
-    				indexLabel : "{label}{y}",
-    				dataPoints : [ {
-    					label : "Savings",
-    					y : 500,
-    					legendText : "Savings"
-    				}, {
-    					label : "Variables",
-    					y : 1500,
-    					legendText : "Variables"
-    				}, {
-    					label : "Fixed",
-    					y : 1500,
-    					legendText : "Fixed"
-    				}, {
-    					label : "Debt",
-    					y : 500,
-    					legendText : "Debt"
-    				} ]
-    			} ]
-    		});
-    		chartIncome.render();
+	function clickBudgetButton(button, text) {
+		$("#" + text).css("display", "");
+		$("#" + button).css("display", "none");
+		$("#" + text).focus();
+		$("#" + text).val($("#" + button).val())
+	}
 
-    		/* Chart for fixed account */
-    		var chartFixed = new CanvasJS.Chart("chartFixedContainer", {
-    			title : {
-    				text : "Fixed Payments",
-    				fontSize : 27
-    			},
-    			axisY : {
-    				title : ""
-    			},
-    			legend : {
-    				verticalAlign : "center",
-    				horizontalAlign : "right"
-    			},
-    			data : [ {
-    				type : "pie",
-    				showInLegend : true,
-    				toolTipContent : "{label} <br/> {y}",
-    				indexLabel : "{label} - {y}",
-    				dataPoints : [ {
-    					label : "Subscription",
-    					y : 250,
-    					legendText : "Subscription"
-    				}, {
-    					label : "Utility",
-    					y : 200,
-    					legendText : "Utility"
-    				}, {
-    					label : "Rent",
-    					y : 700,
-    					legendText : "Rent"
-    				}, {
-    					label : "Insurance",
-    					y : 100,
-    					legendText : "Insurance"
-    				}, {
-    					label : "Lease",
-    					y : 250,
-    					legendText : "Lease"
-    				} ]
-    			} ]
-    		});
-    		chartFixed.render();
-
-    		/* Chart for savings account */
-    		var chartSavings = new CanvasJS.Chart("chartSavingsContainer", {
-    			title : {
-    				text : "Savings Amount"
-    			},
-    			axisY : {
-    				title : "",
-    				includeZero : false
-    			},
-    			axisX : {
-    				interval : 1
-    			},
-    			data : [ {
-    				type : "line", //try changing to column, area
-    				toolTipContent : "{label}: {y}/-",
-    				dataPoints : [ {
-    					label : "2018",
-    					y : 20
-    				}, {
-    					label : "2019",
-    					y : 25
-    				}, {
-    					label : "2020",
-    					y : 30
-    				}, {
-    					label : "2021",
-    					y : 35
-    				}, {
-    					label : "2022",
-    					y : 40
-    				}, {
-    					label : "2023",
-    					y : 45
-    				}, {
-    					label : "2024",
-    					y : 50
-    				}, {
-    					label : "2025",
-    					y : 55
-    				} ]
-    			} ]
-    		});
-    		chartSavings.render();
-
-    		$(".canvasjs-chart-credit").css("display", "none");
-    	});
-
-    	function clickBudgetButton(button, text) {
-    		$("#" + text).css("display", "");
-    		$("#" + button).css("display", "none");
-    		$("#" + text).focus();
-    		$("#" + text).val($("#" + button).val())
-    	}
-
-    	function budgetTextBlur(button, text) {
-    		$("#" + text).css("display", "none");
-    		$("#" + button).val($("#" + text).val())
-    		$("#" + button).css("display", "");
-    	}
-    </script>
+	function budgetTextBlur(button, text) {
+		$("#" + text).css("display", "none");
+		$("#" + button).val($("#" + text).val())
+		$("#" + button).css("display", "");
+	}
+</script>
 <style>
 /* Remove the navbar's default margin-bottom and rounded borders */
 .navbar {
@@ -225,7 +209,7 @@
 }
 </style>
 </head>
-<body ng-app="myApp" ng-controller="myCtrl">
+<body>
 	<nav class="navbar navbar-inverse"
 		style="background-image: url(../header-banner.jpg);">
 		<div class="container-fluid">
@@ -235,7 +219,7 @@
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#" class="loginUser"><span
-							class="glyphicon glyphicon-user"></span>  {{myWelcome}}</a></li>
+							class="glyphicon glyphicon-user"></span> User</a></li>
 				</ul>
 			</div>
 		</div>
