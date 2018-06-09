@@ -1,0 +1,11 @@
+{
+  "lambda": {
+    "role": "be-executor",
+    "name": "be",
+    "region": "eu-west-2"
+  },
+  "api": {
+    "id": "yoekpgbt8k",
+    "module": "propo"
+  }
+}
