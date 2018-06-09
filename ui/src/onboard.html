@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Onboard</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+<script>
+	$(document).ready(function() {
+		/* Chart for income account */
+		var chartIncome = new CanvasJS.Chart("chartIncomeContainer", {
+			title : {
+				text : "Income distribution",
+				fontSize : 27
+			},
+			axisY : {
+				title : ""
+			},
+			legend : {
+				verticalAlign : "center",
+				horizontalAlign : "right"
+			},
+			data : [ {
+				type : "pie",
+				showInLegend : true,
+				toolTipContent : "{label} <br/> {y}",
+				indexLabel : "{label}{y}",
+				dataPoints : [ {
+					label : "Savings",
+					y : 500,
+					legendText : "Savings"
+				}, {
+					label : "Variables",
+					y : 1500,
+					legendText : "Variables"
+				}, {
+					label : "Fixed",
+					y : 1500,
+					legendText : "Fixed"
+				}, {
+					label : "Debt",
+					y : 500,
+					legendText : "Debt"
+				} ]
+			} ]
+		});
+		chartIncome.render();
+
+		/* Chart for fixed account */
+		var chartFixed = new CanvasJS.Chart("chartFixedContainer", {
+			title : {
+				text : "Fixed Payments",
+				fontSize : 27
+			},
+			axisY : {
+				title : ""
+			},
+			legend : {
+				verticalAlign : "center",
+				horizontalAlign : "right"
+			},
+			data : [ {
+				type : "pie",
+				showInLegend : true,
+				toolTipContent : "{label} <br/> {y}",
+				indexLabel : "{label} - {y}",
+				dataPoints : [ {
+					label : "Subscription",
+					y : 250,
+					legendText : "Subscription"
+				}, {
+					label : "Utility",
+					y : 200,
+					legendText : "Utility"
+				}, {
+					label : "Rent",
+					y : 700,
+					legendText : "Rent"
+				}, {
+					label : "Insurance",
+					y : 100,
+					legendText : "Insurance"
+				}, {
+					label : "Lease",
+					y : 250,
+					legendText : "Lease"
+				} ]
+			} ]
+		});
+		chartFixed.render();
+
+		/* Chart for savings account */
+		var chartSavings = new CanvasJS.Chart("chartSavingsContainer", {
+			title : {
+				text : "Savings Amount"
+			},
+			axisY : {
+				title : "",
+				includeZero : false
+			},
+			axisX : {
+				interval : 1
+			},
+			data : [ {
+				type : "line", //try changing to column, area
+				toolTipContent : "{label}: {y}/-",
+				dataPoints : [ {
+					label : "2018",
+					y : 20
+				}, {
+					label : "2019",
+					y : 25
+				}, {
+					label : "2020",
+					y : 30
+				}, {
+					label : "2021",
+					y : 35
+				}, {
+					label : "2022",
+					y : 40
+				}, {
+					label : "2023",
+					y : 45
+				}, {
+					label : "2024",
+					y : 50
+				}, {
+					label : "2025",
+					y : 55
+				} ]
+			} ]
+		});
+		chartSavings.render();
+
+		$(".canvasjs-chart-credit").css("display", "none");
+	});
+
+	function clickBudgetButton(button, text) {
+		$("#" + text).css("display", "");
+		$("#" + button).css("display", "none");
+		$("#" + text).focus();
+		$("#" + text).val($("#" + button).val())
+	}
+
+	function budgetTextBlur(button, text) {
+		$("#" + text).css("display", "none");
+		$("#" + button).val($("#" + text).val())
+		$("#" + button).css("display", "");
+	}
+</script>
+<style>
+/* Remove the navbar's default margin-bottom and rounded borders */
+.navbar {
+	margin-bottom: 0;
+	border-radius: 0;
+}
+
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {
+	height: 450px
+}
+
+/* Set gray background color and 100% height */
+.sidenav {
+	padding-top: 20px;
+	background-color: #f1f1f1;
+	height: 100%;
+}
+
+.table-heading {
+	text-align: center;
+}
+
+.form-control {
+	margin: 0px auto;
+	width: 25%;
+	background-color: green;
+	color: #fff;
+	text-align: right;
+}
+
+.tab-content {
+	text-align: center;
+}
+
+.loginUser {
+	color: #fff !important;
+	line-height: 67px !important;
+	font-size: 100% !important;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+	.sidenav {
+		height: auto;
+		padding: 15px;
+	}
+	.row.content {
+		height: auto;
+	}
+}
+</style>
+</head>
+<body>
+	<nav class="navbar navbar-inverse"
+		style="background-image: url(../header-banner.jpg);">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<img class="img-rounded" src="../propo logo small white.png">
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#" class="loginUser"><span
+							class="glyphicon glyphicon-user"></span> User</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container-fluid text-center">
+		<div class="row content">
+			<div class="col-sm-12 text-left">
+				<h3>Onboard</h3>
+				<!--Contents goes here-->
+			</div>
+		</div>
+	</div>
+</body>
+</html>
